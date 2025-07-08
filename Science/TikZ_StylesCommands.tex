@@ -1,0 +1,91 @@
+% global TikZ styles
+\tikzset{
+    every node/.style = {draw = none,
+	                     inner sep = 0pt,
+	                     outer sep = 0pt},
+    %
+    grid/.style={draw,step=#1,gray,very thin,dotted},
+    grid/.default={1.0cm},
+    %
+    axis/.style={draw,densely dotted,gray,font=\small,text=gray,->,>=stealth},
+    %
+    fixture/.style 2 args = {fill,
+                             pattern = north east lines,
+                             minimum width  = #1*1cm,
+                             minimum height = #2*1cm},
+    %
+    spring/.style = {draw,
+                     decorate,decoration = {coil,
+                                            aspect         = 0.5,
+                                            segment length = #1*1mm,
+                                            amplitude      = 2mm,
+                                           }
+                },
+    spring/.default = {1},
+    %
+    mass/.style = {rectangle,
+                   minimum size=#1*1cm,
+                   draw=black,
+                   fill=lightgray,
+                   very thin},
+    mass/.default={0.7},
+    %
+    force/.style={->,
+                  >=latex,
+                  draw=blue,
+                  fill=blue,
+                  thick},
+}  % \tikzset
+
+\newcommand{\hhO}[4]
+    % horizontal harmonic oscillator
+    % #1 : length         of spring's coil
+    % #2 : stretch factor of spring's coil
+    % #3 : size of square representing mass
+    % #4 : vertical offset of sub figure
+{
+    \begin{scope}[yshift=#4]
+        % define constants
+        \def\LENGTH{2*#1}    		% length    of fixture's floor
+        \def\HEIGHT{#3}    			% height    of fixture's wall
+        \def\THICKNESS{0.25}    	% thickness of fixture
+        \def\ATTACHMENT{0.5}		% length of spring's attachment
+        \def\SPRING{#1}				% length of relaxed spring
+        \def\STRETCH{#2}			% stretch factor of spring's coil
+        \def\MASS{#3}				% size of square representing mass
+
+        % define coordinates
+        \path coordinate (E)  at   (0,0);                    			             % edge of fixture
+        \path coordinate (F)  at ( $(E) + (0,0.5*\HEIGHT)$ );                        % fix point of spring        
+        \path coordinate (L)  at ( $(F) + (\ATTACHMENT,0)$ );                        % left  point of spring's coil
+        \path coordinate (R)  at ( $(L) + (\SPRING*\STRETCH,0)$ );                   % right point of spring's coil
+        \path coordinate (M)  at ( $(R) + (\ATTACHMENT+0.5*\MASS,0)$ );	             % center of mass
+        \path coordinate (EQ) at ( $(F) + (2*\ATTACHMENT+\SPRING+0.5*\MASS,0)$ );    % mass' equilibrium position
+
+        % draw floor
+        \path[draw,very thick] (E) -- (0:\LENGTH);
+        \path (E) node[fixture={\LENGTH}{\THICKNESS}, anchor=north west] {};
+
+        % draw left wall
+        \path[draw,very thick] (E) -- (90:\HEIGHT);
+        \path (E) node[fixture={\THICKNESS}{\HEIGHT}, anchor=south east] {};
+        \path (E) node[fixture={\THICKNESS}{\THICKNESS}, anchor=north east] {};
+
+        % draw connection of spring to wall
+        \path[draw] (F) -- (L);
+
+        % draw spring's coil
+        \path[spring=\STRETCH] (L) -- (R);
+
+        % draw connection of spring to mass
+        \path[draw] (R) -- ( $(M)-(0.5*\MASS,0)$ );
+
+        % draw mass
+        \path (M) node[mass=\MASS,yshift=0.4pt] (M) {$m$};
+
+        % draw coordinate system
+        \draw[axis] (EQ) -- +(-2,0) -- +(2,0) node[below right] {$x$};
+        \draw[axis] (EQ) -- +(0,1) node[above left] {$y$};
+    \end{scope}  % [yshift=#4]
+}  % \newcommand{\hhO}
+
