@@ -37,6 +37,54 @@
                   thick},
 }  % \tikzset
 
+\newcommand{\vho}[4]
+    % vertical harmonic oscillator
+    % #1 : length         of spring's coil
+    % #2 : stretch factor of spring's coil
+    % #3 : size of circle representing mass
+	% #4 : horizontal shift of sub figure
+{
+    \begin{scope}[xshift=#4]
+        % define constants
+        \def\LENGTH{2}    			% length of fixture
+        \def\THICKNESS{0.25}    	% thickness of fixture
+        \def\ATTACHMENT{0.5}		% length of spring's attachment
+        \def\SPRING{#1}				% relaxed length of spring's coil
+        \def\STRETCH{#2}			% stretch factor of spring's coil
+        \def\MASS{#3}				% radius of circle representing mass
+
+        % define coordinates
+		\path coordinate (F)  at (0,0);                    					% mid point of fixture
+		\path coordinate (L)  at ($(F)+(-0.5*\LENGTH,0)$); 					% left edge of fixture
+		\path coordinate (R)  at ($(F)+(+0.5*\LENGTH,0)$); 					% right edge of fixture
+
+		\path coordinate (T) at (0,\ATTACHMENT);							% top of spring's coil
+		\path coordinate (B) at (0,-#1*\SPRING);							% bottom of spring's coil
+
+		\path coordinate (M) at ($(B)-(0,\ATTACHMENT+0.5*\MASS)$);	% center of mass
+
+		% \path coordinate (M #2) at ($(M)+(1.25,0)$);
+
+        % draw fixture
+		\path[draw,very thick] (L) -- (R);
+		\path (F) node[fixture={\LENGTH}{\THICKNESS}, anchor = south] {};
+
+		% connect spring to fixture
+		\path[draw] (F) -- (T);
+
+		% spring
+		\path[spring=#2] (T) -- (B);
+
+		% connect spring to mass
+		\path[draw] (B) -- ($(M)+(0,0.5*\MASS)$);
+
+		% mass
+		\path (M) node[mass=\MASS*1cm] (M) {$m$};
+		\path (M.north east) node[above right=1pt] {A};
+    \end{scope}  % [xshift=#4]
+}  % \newcommand{\vhO}
+
+
 \newcommand{\hhO}[4]
     % horizontal harmonic oscillator
     % #1 : length         of spring's coil
