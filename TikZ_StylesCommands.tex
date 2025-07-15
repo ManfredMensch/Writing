@@ -127,18 +127,18 @@
 
         % define coordinates
         \path coordinate (E)  at   (0,0);                    			             % edge of fixture
-        \path coordinate (F)  at ( $(E) + (0,0.5*\HEIGHT)$ );                        % fix point of spring        
-        \path coordinate (L)  at ( $(F) + (\ATTACHMENT,0)$ );                        % left  point of spring's coil
-        \path coordinate (R)  at ( $(L) + (\SPRING*\STRETCH,0)$ );                   % right point of spring's coil
-        \path coordinate (M)  at ( $(R) + (\ATTACHMENT+0.5*\MASS,0)$ );	             % center of mass
-        \path coordinate (EQ) at ( $(F) + (2*\ATTACHMENT+\SPRING+0.5*\MASS,0)$ );    % mass' equilibrium position
+        \path coordinate (F)  at ( $(E) + ( 0, 0.5*\HEIGHT )$ );                     % fix point of spring
+        \path coordinate (L)  at ( $(F) + ( \ATTACHMENT, 0 )$ );                     % left  point of spring's coil
+        \path coordinate (R)  at ( $(L) + ( \SPRING*\STRETCH, 0 )$ );                % right point of spring's coil
+        \path coordinate (M)  at ( $(R) + ( \ATTACHMENT+0.5*\MASS, 0 )$ );	         % center of mass
+        \path coordinate (EQ) at ( $(F) + ( 2*\ATTACHMENT+\SPRING+0.5*\MASS, 0 )$ ); % mass' equilibrium position
 
         % draw floor
-        \path[draw,very thick] (E) -- (0:\LENGTH);
+        \path[draw,very thick] (E) -- ( 0:\LENGTH );
         \path (E) node[fixture={\LENGTH}{\THICKNESS}, anchor=north west] {};
 
         % draw left wall
-        \path[draw,very thick] (E) -- (90:\HEIGHT);
+        \path[draw,very thick] (E) -- ( 90:\HEIGHT );
         \path (E) node[fixture={\THICKNESS}{\HEIGHT}, anchor=south east] {};
         \path (E) node[fixture={\THICKNESS}{\THICKNESS}, anchor=north east] {};
 
@@ -149,14 +149,15 @@
         \path[spring=\STRETCH] (L) -- (R);
 
         % draw connection of spring to mass
-        \path[draw] (R) -- ( $(M)-(0.5*\MASS,0)$ );
+        \path[draw] (R) -- ( $(M)-( .5*\MASS, 0 )$ );
 
         % draw mass
         \path (M) node[mass=\MASS,yshift=0.4pt] (M) {$m$};
 
         % draw coordinate system
-        \draw[axis] (EQ) -- +(-2,0) -- +(2,0) node[below right] {$x$};
-        \draw[axis] (EQ) -- +(0,1) node[above left] {$y$};
+        \draw[axis] ( $(EQ)+( -2,  0.00)$ ) -- ( $(EQ) + ( 2.00, 0.00 )$ ) node[below right] {$x$};
+        \draw[axis] ( $(EQ)+(  0, -0.25)$ ) -- ( $(EQ) + ( 0.00, 1.00 )$ ) node[above left]  {$y$};
+
     \end{scope}  % [yshift=#4]
 }  % \newcommand{\HorizontalMassSpringSystem}
 
