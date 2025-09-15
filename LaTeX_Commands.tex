@@ -1,17 +1,45 @@
+%
 % Overwrite / adjust existing LaTeX commands.
+%
 % set vectors in bold face, without arrow accent
 \renewcommand{\vec}[1]
 {
     \mathbf{#1}
 }
-% use bold face plus hat / roof accent for unit vectors
+
+% use bold face with hat / roof accent for unit vectors
 \let\oldhat\hat
 \renewcommand{\hat}[1]
 {
     \oldhat{\mathbf{#1}}
 }
+
+% cross product symbol with less space
+\newcommand{\cross}
+{
+    \!\times\!
+}
+
 % set differentials in upright font
 \newcommand*\diff
 {
     \mathrm{d}
 }
+
+% minipage with custom vertical alignment, width in em, line spacing, and fontsize
+\newcommand{\MP}[4]{
+    \begin{minipage}[#1]{#2em}
+        \renewcommand\baselinestretch{#3}
+        \selectfont
+        {\footnotesize #4}
+    \end{minipage}}
+
+% various mathematical symbols
+\DeclareMathOperator{\ID}{ id }
+\DeclareMathOperator{\SPAN}{ span }
+\DeclareMathOperator{\DIM}{ dim }
+\DeclareMathOperator{\RANGE}{ range }
+\DeclareMathOperator{\KER}{ ker }
+
+% custom AMS theorem environments 
+\input{/home/manfredm/Projects/Writing/AMS_TheoremEnvironments}

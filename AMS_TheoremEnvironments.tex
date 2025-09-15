@@ -1,0 +1,85 @@
+% custom theorem environments
+\newtheoremstyle{MyTheorem}
+  {}                                            % vertical space above, empty = default value
+  {}                                            % vertical space below
+  {\itshape}                                    % body font
+  {}                                            % indent amount
+  {\bfseries}                                   % head font
+  {}                                            % punctuation after head
+  {\newline}                                    % space after head: \newline = linebreak
+  {\begin{minipage}[t]{0.1\textwidth}           % head specification
+        \thmnumber{#2 }%
+   \end{minipage}%
+   \begin{minipage}[t]{0.9\textwidth}%
+        \thmname{#1}%
+        \thmnote{: \\#3\\[-8pt]}%
+   \end{minipage}%
+  }
+
+\theoremstyle{MyTheorem}
+    \newtheorem{theorem}{Theorem}[section]
+    \newtheorem{lemma}[theorem]{Lemma}
+
+
+\newtheoremstyle{MyDefinition}
+  {}                                            % vertical space above, empty = default value
+  {}                                            % vertical space below
+  {\normalfont}                                 % body font
+  {}                                            % indent amount
+  {\bfseries}                                   % head font
+  {}                                            % punctuation after head
+  {\newline}                                    % space after head: \newline = linebreak
+  {\begin{minipage}[t]{0.1\textwidth}           % head specification
+        \thmnumber{#2 }%
+   \end{minipage}%
+   \begin{minipage}[t]{0.9\textwidth}%
+        \thmname{#1}%
+        \thmnote{: \\#3\\[-8pt]}%
+   \end{minipage}%
+  }  % head specification
+
+\theoremstyle{MyDefinition}
+    \newtheorem{definition}[theorem]{Definition}
+    \newtheorem{notation}[theorem]{Notation}
+    \newtheorem{notations}[theorem]{Notations}
+
+
+\newtheoremstyle{NumberedExample}
+  {}                                            % vertical space above, empty = default value
+  {}                                            % vertical space below
+  {\normalfont}                                 % body font
+  {}                                            % indent amount
+  {\bfseries}                                   % head font
+  {}                                            % punctuation after head
+  {\newline}                                    % space after head: \newline = linebreak
+  {\begin{minipage}[t]{0.14\textwidth}          % head specification
+        \thmname{#1}%
+   \end{minipage}%
+   \begin{minipage}[t]{0.1\textwidth}%
+        \hfill \thmnumber{#2}%
+   \end{minipage}%
+   \begin{minipage}[t]{0.75\textwidth}%
+        \thmnote{\ : #3}%
+   \end{minipage}%
+  }  % head specification
+
+\theoremstyle{NumberedExample}
+    \newtheorem{example_n}{Example}[section]
+
+
+\newtheoremstyle{MyRemark}
+  {}                                            % vertical space above, empty = default value
+  {}                                            % vertical space below
+  {\normalfont}                                 % body font
+  {}                                            % indent amount
+  {\bfseries}                                   % head font
+  {}                                            % punctuation after head
+  {\newline}                                    % space after head: \newline = linebreak
+  {\thmname{#1}\thmnote{: #3}}                  % head specification
+
+\theoremstyle{MyRemark}
+    \newtheorem{remark}{Remark}
+    \newtheorem{remarks}{Remarks}
+    \newtheorem{example}{Example}
+    \newtheorem{examples}{Examples}
+    \newtheorem{motivation}{Motivation}
