@@ -1,0 +1,8 @@
+antiderivative
+cosinusoidal
+Dimensionalization
+gridlines
+Nondimensionalization
+scalings
+undriven
+unshifted
