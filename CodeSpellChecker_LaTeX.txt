@@ -1,3 +1,6 @@
+amsbsy
+amsopn
+amstext
 antiderivative
 biblatex
 citecolor
@@ -6,11 +9,15 @@ Dimensionalization
 filecolor
 fontsize
 gridlines
+labelfont
+labelsep
 linkbordercolor
 linkcolor
 listlbls
+mathtools
 minipage
 Nondimensionalization
+nullfont
 pdfauthor
 pdfcreator
 pdfkeywords
@@ -20,6 +27,7 @@ pdfsubject
 pdftitle
 scalings
 showlabels
+singlelinecheck
 undriven
 unshifted
 urlbordercolor
