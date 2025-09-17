@@ -11,6 +11,7 @@ fontsize
 gridlines
 labelfont
 labelsep
+lightgray
 linkbordercolor
 linkcolor
 listlbls
