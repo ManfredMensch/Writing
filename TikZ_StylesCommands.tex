@@ -1,4 +1,4 @@
-% global TikZ styles
+%========= global TikZ styles =====================================================================
 \tikzset{
     every node/.style = {draw = none,
 	                     inner sep = 0pt,
@@ -40,8 +40,11 @@
                 thick},
 }  % \tikzset
 
+
+%========= SimpleGravityPendulum ==================================================================
+%========= Schematic ==============================================================================
 \newcommand{\SimpleGravityPendulum}[4]
-    % Simple Gravity Pendulum
+    % Schematic Diagram of Simple Gravity Pendulum
     % #1 : length of rod
     % #2 : angle  of rod with vertical
     % #3 : size of circle representing mass
@@ -58,48 +61,71 @@
         \def\ARC{1.50*\ANGLE}       % angle of arc indicating circular trajectory of the mass
 
         % define coordinates
-		\path coordinate (FM)  at (0,0);                                % mid point of fixture
-		\path coordinate (FL)  at ( $(FM) + (-0.5*\LENGTH, 0)$ );        % left edge of fixture
-		\path coordinate (FR)  at ( $(FM) + (+0.5*\LENGTH, 0)$ );        % right edge of fixture
+		\path coordinate (FM)  at (0,0);                             % mid point of fixture
+                                                                     % also pivot point of pendulum
+		\path coordinate (FL)  at ( $(FM) + (-0.5*\LENGTH, 0)$ );    % left edge of fixture
+		\path coordinate (FR)  at ( $(FM) + (+0.5*\LENGTH, 0)$ );    % right edge of fixture
 
-		\path coordinate (MC) at ( \ANGLE-90 : \ROD );                    % center of mass
+		\path coordinate (MC)  at ( \ANGLE-90 : \ROD );              % center of mass
 
-        \path coordinate (O)   at ( $(FM) + (0, -1.0*\ROD)$ );           % origin of coordinate system
+        \path coordinate (O)   at ( $(FM) + (0, -1.0*\ROD)$ );       % origin of coordinate system
 
-        % draw part of the circle trajectory of the mass
-        \draw[dashed] (FM) ++(-\ARC-90 : \ROD) arc (-\ARC-90 : \ARC-90 : \ROD);
-
-        % draw coordinate system
+        % coordinate system
         \draw[axis] (O) +( -3.10,  0.00) -- +( +3.10, 0.00)                node[below right] {$x$};
         \draw[axis] (O) +(  0.00, -0.25) -- +(  0.00, \ROD + 2*\THICKNESS) node[above right] {$y$};
 
-        % draw fixture
+        % fixture
 		\path[draw,very thick] (FL) -- (FR);
 		\path (FM) node[fixture={\LENGTH}{\THICKNESS}, anchor = south] {};
 
-		% draw rod
+        % part of the circular trajectory of the mass
+        \draw[dashed] (FM) ++(-\ARC-90 : \ROD) arc (-\ARC-90 : \ARC-90 : \ROD);
+
+		% rod
 		\path[rod] (FM) -- (MC);
 
-    	% draw mass
+    	% mass
         \path (MC) node[mass=\MASS,circle] (M) {$m$};
 
         % angle between rod and vertical y-axis
         \draw[dotted,->,>=stealth] (FM) ++( -90 : 1.5 ) arc ( -90 : \ANGLE-90 : 1.5 );
-        \path (FM)++( {0.5*\ANGLE-90} : 1.5 ) node[below=-5pt,fill=white] {$\theta$};
+        \path (FM)++( {0.5*\ANGLE-90} : 1.5 ) node[below=-5pt,fill=white,inner sep = 1pt] {$\theta$};
 
 		% indicate rod's length = radius of circular trajectory of the mass
-		\draw[latex-latex,dashed,gray] ( $(FM)$ ) -- node[fill=white] {$l$} ( -\ANGLE-90 : \ROD );
-
-        % \draw[dashed] (FM)  +(0.1,0)     --  +(0.9,0);
-        % \draw[dashed] (MC) +(0.1,0)     --  +(0.9,0);
-		% \draw[latex-latex,dashed] ( $(FM) + (0.5, 0.0)$ ) -- node[fill=white] {$l$} ( $(MC) + (0.5, 0.0)$ );
+		\draw[latex-latex,dashed,gray] ( $(FM)$ ) -- node[black,fill=white,inner sep = 1pt] {$l$} ( -\ANGLE-90 : \ROD );
 
     \end{scope}  % [xshift=#4]
 }  % \newcommand{\SimpleGravityPendulum}
 
+%========= Free Body Diagram ======================================================================
+\newcommand{\SimpleGravityPendulumFBD}[4]
+    % Free Body Diagram of Simple Gravity Pendulum
+    % #1 : length of rod
+    % #2 : angle  of rod with vertical
+    % #3 : size of circle representing mass
+	% #4 : horizontal shift of sub figure
+    % !!!   No terminating ';' when calling this command   !!!
+{
+    \begin{scope}[xshift=#4]
+        % define constants
+        \def\G{10.0}      % gravitational acceleration
+
+        \def\ROD{#1}              % length of rod
+        \def\ANGLE{#2}           % angle of rod with vertical
+        \def\MASS{#3}             % radius of circle representing mass
+        \def\ARC{1.50*\ANGLE}       % angle of arc indicating circular trajectory of the mass
+
+        % define coordinates
+        \path coordinate (P)   at ( 0, 0 );       % pivot point of pendulum
+		\path coordinate (MC)  at ( \ANGLE-90 : \ROD );              % center of mass
+
+
+    \end{scope}  % [xshift=#4]
+}  % \newcommand{\SimpleGravityPendulumFBD}
 
 
 
+%========= VerticalMassSpringSystem ===============================================================
 \newcommand{\VerticalMassSpringSystem}[5]
     % Vertical Mass Spring System
     % #1 : length         of spring's coil
@@ -170,6 +196,7 @@
 }  % \newcommand{\VerticalMassSpringSystem}
 
 
+%========= HorizontalMassSpringSystem =============================================================
 \newcommand{\HorizontalMassSpringSystem}[4]
     % horizontal harmonic oscillator
     % #1 : length         of spring's coil
@@ -223,4 +250,3 @@
 
     \end{scope}  % [yshift=#4]
 }  % \newcommand{\HorizontalMassSpringSystem}
-
