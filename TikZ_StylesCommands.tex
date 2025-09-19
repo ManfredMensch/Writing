@@ -43,22 +43,23 @@
 
 %========= SimpleGravityPendulum ==================================================================
 %========= Schematic ==============================================================================
-\newcommand{\SimpleGravityPendulum}[4]
+\newcommand{\SimpleGravityPendulum}[5]
     % Schematic Diagram of Simple Gravity Pendulum
     % #1 : length of rod
     % #2 : angle  of rod with vertical
     % #3 : size of circle representing mass
 	% #4 : horizontal shift of sub figure
+	% #5 : vertical   shift of sub figure
     % !!!   No terminating ';' when calling this command   !!!
 {
-    \begin{scope}[xshift=#4]
+    \begin{scope}[xshift=#4,yshift=#5]
         % define constants
-        \def\LENGTH{2}              % length of fixture
-        \def\THICKNESS{0.25}        % thickness of fixture
-        \def\ROD{#1}                % length of rod
-        \def\ANGLE{#2}              % angle of rod with vertical
-        \def\MASS{#3}               % radius of circle representing mass
-        \def\ARC{1.50*\ANGLE}       % angle of arc indicating circular trajectory of the mass
+        \def\LENGTH{2}            % length of fixture
+        \def\THICKNESS{0.25}      % thickness of fixture
+        \def\ROD{#1}              % length of rod
+        \def\ANGLE{#2}            % angle of rod with vertical
+        \def\MASS{#3}             % radius of circle representing mass
+        \def\ARC{1.50*\ANGLE}     % angle of arc indicating circular trajectory of the mass
 
         % define coordinates
 		\path coordinate (FM)  at (0,0);                             % mid point of fixture
@@ -71,56 +72,95 @@
         \path coordinate (O)   at ( $(FM) + (0, -1.0*\ROD)$ );       % origin of coordinate system
 
         % coordinate system
-        \draw[axis] (O) +( -3.10,  0.00) -- +( +3.10, 0.00)                node[below right] {$x$};
-        \draw[axis] (O) +(  0.00, -0.25) -- +(  0.00, \ROD + 2*\THICKNESS) node[above right] {$y$};
+        \draw[axis] (O) +( -3.10,  0.00) -- +( +3.10, 0.00)
+            node[below right] {$x$};
+        \draw[axis] (O) +(  0.00, -0.25) -- +(  0.00, \ROD + 2*\THICKNESS)
+            node[above right] {$y$};
 
         % fixture
 		\path[draw,very thick] (FL) -- (FR);
-		\path (FM) node[fixture={\LENGTH}{\THICKNESS}, anchor = south] {};
+		\path (FM)
+            node[fixture={\LENGTH}{\THICKNESS}, anchor = south] {};
 
         % part of the circular trajectory of the mass
-        \draw[dashed] (FM) ++(-\ARC-90 : \ROD) arc (-\ARC-90 : \ARC-90 : \ROD);
+        \draw[dashed] (FM) ++ ( -\ARC-90 : \ROD ) arc ( -\ARC-90 : \ARC-90 : \ROD );
 
 		% rod
 		\path[rod] (FM) -- (MC);
 
     	% mass
-        \path (MC) node[mass=\MASS,circle] (M) {$m$};
+        \path (MC)
+            node[mass=\MASS,circle] (M) {$m$};
 
         % angle between rod and vertical y-axis
         \draw[dotted,->,>=stealth] (FM) ++( -90 : 1.5 ) arc ( -90 : \ANGLE-90 : 1.5 );
-        \path (FM)++( {0.5*\ANGLE-90} : 1.5 ) node[below=-5pt,fill=white,inner sep = 1pt] {$\theta$};
+        \path (FM) ++ ( {0.5*\ANGLE-90} : 1.5 )
+            node[below=-5pt,fill=white,inner sep = 1pt] {$\theta$};
 
 		% indicate rod's length = radius of circular trajectory of the mass
 		\draw[latex-latex,dashed,gray] ( $(FM)$ ) -- node[black,fill=white,inner sep = 1pt] {$l$} ( -\ANGLE-90 : \ROD );
 
-    \end{scope}  % [xshift=#4]
+    \end{scope}  % [xshift=#4,yshift=#5]
 }  % \newcommand{\SimpleGravityPendulum}
 
 %========= Free Body Diagram ======================================================================
-\newcommand{\SimpleGravityPendulumFBD}[4]
+\newcommand{\SimpleGravityPendulumFBD}[5]
     % Free Body Diagram of Simple Gravity Pendulum
     % #1 : length of rod
     % #2 : angle  of rod with vertical
     % #3 : size of circle representing mass
 	% #4 : horizontal shift of sub figure
+	% #5 : vertical   shift of sub figure
     % !!!   No terminating ';' when calling this command   !!!
 {
-    \begin{scope}[xshift=#4]
+    \begin{scope}[xshift=#4,yshift=#5]
         % define constants
-        \def\G{10.0}      % gravitational acceleration
+        \def\G{10.0}              % gravitational acceleration
 
         \def\ROD{#1}              % length of rod
-        \def\ANGLE{#2}           % angle of rod with vertical
+        \def\ANGLE{#2}            % angle of rod with vertical
         \def\MASS{#3}             % radius of circle representing mass
-        \def\ARC{1.50*\ANGLE}       % angle of arc indicating circular trajectory of the mass
+        \def\ARC{0.50*\ANGLE}     % angle of arc indicating circular trajectory of the mass
 
         % define coordinates
-        \path coordinate (P)   at ( 0, 0 );       % pivot point of pendulum
+        \path coordinate (P)   at ( 0, 0 );                          % pivot point of pendulum
 		\path coordinate (MC)  at ( \ANGLE-90 : \ROD );              % center of mass
 
+        % vertical
+        \draw[densely dotted,gray]    (P) + (  {\ROD * sin(\ANGLE)}, +0.50 )
+                                   --     + (  {\ROD * sin(\ANGLE)}, -\ROD - 0.25 );
 
-    \end{scope}  % [xshift=#4]
+        % arc
+        \draw[dashed] (P) ++ ( \ANGLE-\ARC-90 : \ROD ) arc ( \ANGLE-\ARC-90 : \ANGLE+\ARC-90 : \ROD );
+
+        % mass
+        \path (MC)
+            node[mass=\MASS,circle] (M) {$m$};
+
+        % angle between tension force from rod and vertical
+        \draw[dotted,->,>=stealth] (MC) ++ ( +90 : 1.5 ) arc ( +90 : \ANGLE+90 : 1.5 );
+        \path (MC) ++ ( {0.5*\ANGLE+90} : 1.5 )
+            node[below=-5pt,fill=white] {$\theta$};
+
+        % gravitational force
+        \draw[force] (MC) -- ++( 0.00, -0.20 * \G)
+            node[above left=2pt] {${{\vec{F}}\!_g}$};
+        % radial component of gravitational force
+        \draw[force,dashed] (MC) -- ++( \ANGLE-90 : {0.20 * \G * cos(\ANGLE)} )
+            node[above right=1pt] {${\vec{F}\!_{g,r}}$};
+        % tangential component of gravitational force
+        \draw[force,dashed] (MC) + ( \ANGLE-90 : {0.20 *\G * cos(\ANGLE)} ) -- ( $(MC) + ( 0.00, -0.20 * \G)$ )
+            node[below right=2pt] {${\vec{F}\!_{g,t}}$};
+
+        % angle between vertical and radial component of gravitational force
+        \draw[dotted,->,>=stealth] (MC) ++( -90 : 1.5 ) arc ( -90 : \ANGLE-90 : 1.5 );
+        \path (MC)++( {0.5*\ANGLE-90} : 1.5 ) node[below=-5pt,fill=white] {$\theta$};
+
+        % tension force from rod
+        \draw[force] (MC) -- ++( \ANGLE+90 : 0.25*\G )
+            node[below left=1pt] {${{\vec{F}}\!_r}$};
+
+    \end{scope}  % [xshift=#4,yshift=#5]
 }  % \newcommand{\SimpleGravityPendulumFBD}
 
 
