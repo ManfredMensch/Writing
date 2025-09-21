@@ -71,11 +71,19 @@
 
         \path coordinate (O)   at ( $(FM) + (0, -1.0*\ROD)$ );       % origin of coordinate system
 
-        % coordinate system
+        % coordinate systems
+        % Cartesian
         \draw[axis] (O) +( -3.10,  0.00) -- +( +3.10, 0.00)
             node[below right] {$x$};
         \draw[axis] (O) +(  0.00, -0.25) -- +(  0.00, \ROD + 2*\THICKNESS)
             node[above right] {$y$};
+        % plane polar
+        % radial unit vector
+        \draw[axis] (MC) -- ++( \ANGLE-90 : 1 )
+            node[above right=1pt] {$\hat{r}$};
+        % tangential unit vector
+        \draw[axis] (MC) -- ++( \ANGLE : 1 )
+            node[below right=1pt] {$\hat{\uptheta}$};
 
         % fixture
 		\path[draw,very thick] (FL) -- (FR);
@@ -144,13 +152,13 @@
 
         % gravitational force
         \draw[force] (MC) -- ++( 0.00, -0.20 * \G)
-            node[above left=2pt] {${{\vec{F}}\!_g}$};
+            node[left=1pt] {${{\vec{F}}\!_g}$};
         % radial component of gravitational force
         \draw[force,dashed] (MC) -- ++( \ANGLE-90 : {0.20 * \G * cos(\ANGLE)} )
-            node[above right=1pt] {${\vec{F}\!_{g,r}}$};
+            node[right=1pt] {${\vec{F}\!_{g,r}}$};
         % tangential component of gravitational force
-        \draw[force,dashed] (MC) + ( \ANGLE-90 : {0.20 *\G * cos(\ANGLE)} ) -- ( $(MC) + ( 0.00, -0.20 * \G)$ )
-            node[below right=2pt] {${\vec{F}\!_{g,t}}$};
+        \draw[force,dashed] (MC) -- ++( \ANGLE-180 : {0.20 *\G * sin(\ANGLE)} )%( $(MC) + ( 0.00, -0.20 * \G)$ )
+            node[below=1pt] {${\vec{F}\!_{g,t}}$};
 
         % angle between vertical and radial component of gravitational force
         \draw[dotted,->,>=stealth] (MC) ++( -90 : 1.5 ) arc ( -90 : \ANGLE-90 : 1.5 );
