@@ -73,16 +73,20 @@
 
         % coordinate systems
         % Cartesian
-        \draw[axis] (O) +( -3.10,  0.00) -- +( +3.10, 0.00)
+        \draw[axis]    ( $(O) +( -3.10,  0.00)$ )
+                    -- ( $(O) + ( +3.10, 0.00)$ )
             node[below right] {$x$};
-        \draw[axis] (O) +(  0.00, -0.25) -- +(  0.00, \ROD + 2*\THICKNESS)
+        \draw[axis]    ( $(O) + (  0.00, -0.25)$ )
+                    -- ( $(O) + (  0.00, \ROD + 2*\THICKNESS)$ )
             node[above right] {$y$};
         % plane polar
         % radial unit vector
-        \draw[axis] (MC) -- ++( \ANGLE-90 : 1 )
+        \draw[axis]    ( $(MC)$ )
+                    -- ( $(MC) + ( \ANGLE-90 : 1 )$ )
             node[above right=1pt] {$\hat{r}$};
         % tangential unit vector
-        \draw[axis] (MC) -- ++( \ANGLE : 1 )
+        \draw[axis]    ( $(MC)$ )
+                    -- ( $(MC) + ( \ANGLE : 1 )$ )
             node[below right=1pt] {$\hat{\uptheta}$};
 
         % fixture
@@ -96,10 +100,6 @@
 		% rod
 		\path[rod] (FM) -- (MC);
 
-    	% mass
-        \path (MC)
-            node[mass=\MASS,circle] (M) {$m$};
-
         % angle between rod and vertical y-axis
         \draw[dotted,->,>=stealth] (FM) ++( -90 : 1.5 ) arc ( -90 : \ANGLE-90 : 1.5 );
         \path (FM) ++ ( {0.5*\ANGLE-90} : 1.5 )
@@ -107,6 +107,10 @@
 
 		% indicate rod's length = radius of circular trajectory of the mass
 		\draw[latex-latex,dashed,gray] ( $(FM)$ ) -- node[black,fill=white,inner sep = 1pt] {$l$} ( -\ANGLE-90 : \ROD );
+
+        % mass
+        \path (MC)
+            node[mass=\MASS,circle] (M) {$m$};
 
     \end{scope}  % [xshift=#4,yshift=#5]
 }  % \newcommand{\SimpleGravityPendulum}
@@ -131,8 +135,8 @@
         \def\ARC{0.50*\ANGLE}     % angle of arc indicating circular trajectory of the mass
 
         % define coordinates
-        \path coordinate (P)   at ( 0, 0 );                          % pivot point of pendulum
-		\path coordinate (MC)  at ( \ANGLE-90 : \ROD );              % center of mass
+        \path coordinate (P)   at ( 0, 0 );                % pivot point of pendulum
+		\path coordinate (MC)  at ( \ANGLE-90 : \ROD );    % center of mass
 
         % vertical
         \draw[densely dotted,gray]    (P) + (  {\ROD * sin(\ANGLE)}, +0.50 )
@@ -140,10 +144,10 @@
 
         % arc
         \draw[dashed] (P) ++ ( \ANGLE-\ARC-90 : \ROD ) arc ( \ANGLE-\ARC-90 : \ANGLE+\ARC-90 : \ROD );
-
-        % mass
-        \path (MC)
-            node[mass=\MASS,circle] (M) {$m$};
+    
+        % tension force from rod
+        \draw[force] (MC) -- ++( \ANGLE+90 : 0.25*\G )
+            node[below left=1pt] {${{\vec{F}}\!_r}$};
 
         % angle between tension force from rod and vertical
         \draw[dotted,->,>=stealth] (MC) ++ ( +90 : 1.5 ) arc ( +90 : \ANGLE+90 : 1.5 );
@@ -151,22 +155,30 @@
             node[below=-5pt,fill=white] {$\theta$};
 
         % gravitational force
-        \draw[force] (MC) -- ++( 0.00, -0.20 * \G)
+        \draw[force]    ( $(MC)$ )
+                     -- ( $(MC) + ( 0.00, -0.20 * \G)$ )
             node[left=1pt] {${{\vec{F}}\!_g}$};
-        % radial component of gravitational force
-        \draw[force,dashed] (MC) -- ++( \ANGLE-90 : {0.20 * \G * cos(\ANGLE)} )
+        % ... radial component
+        \draw[dotted,lightgray]    ( $(MC) + ( \ANGLE-180 : {0.20 *\G * sin(\ANGLE)} )$ )
+                                -- ( $(MC) + ( 0.00, -0.20 * \G)$ );
+        \draw[force,dashed]    ( $(MC)$ )
+                            -- ( $(MC) + ( \ANGLE-90 : {0.20 * \G * cos(\ANGLE)} )$ )
             node[right=1pt] {${\vec{F}\!_{g,r}}$};
-        % tangential component of gravitational force
-        \draw[force,dashed] (MC) -- ++( \ANGLE-180 : {0.20 *\G * sin(\ANGLE)} )%( $(MC) + ( 0.00, -0.20 * \G)$ )
+        % ... tangential component
+        \draw[dotted,lightgray]    ( $(MC) + ( \ANGLE-90 : {0.20 * \G * cos(\ANGLE)} )$ )
+                                -- ( $(MC) + ( 0.00, -0.20 * \G)$ );
+        \draw[force,dashed]    ( $(MC)$ )
+                            -- ( $(MC) + ( \ANGLE-180 : {0.20 *\G * sin(\ANGLE)} )$ )
             node[below=1pt] {${\vec{F}\!_{g,t}}$};
 
         % angle between vertical and radial component of gravitational force
         \draw[dotted,->,>=stealth] (MC) ++( -90 : 1.5 ) arc ( -90 : \ANGLE-90 : 1.5 );
-        \path (MC)++( {0.5*\ANGLE-90} : 1.5 ) node[below=-5pt,fill=white] {$\theta$};
+        \path (MC)++( {0.5*\ANGLE-90} : 1.5 )
+            node[below=-5pt,fill=white] {$\theta$};
 
-        % tension force from rod
-        \draw[force] (MC) -- ++( \ANGLE+90 : 0.25*\G )
-            node[below left=1pt] {${{\vec{F}}\!_r}$};
+        % mass
+        \path (MC)
+            node[mass=\MASS,circle] (M) {$m$};
 
     \end{scope}  % [xshift=#4,yshift=#5]
 }  % \newcommand{\SimpleGravityPendulumFBD}
