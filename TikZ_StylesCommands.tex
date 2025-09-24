@@ -257,6 +257,7 @@
 
 
 %========= HorizontalMassSpringSystem =============================================================
+%========= Schematic ==============================================================================
 \newcommand{\HorizontalMassSpringSystem}[4]
     % horizontal harmonic oscillator
     % #1 : length         of spring's coil
@@ -283,30 +284,33 @@
         \path coordinate (M)  at ( $(R) + ( \ATTACHMENT+0.5*\MASS, 0 )$ );	         % center of mass
         \path coordinate (EQ) at ( $(F) + ( 2*\ATTACHMENT+\SPRING+0.5*\MASS, 0 )$ ); % mass' equilibrium position
 
-        % draw floor
+        % floor
         \path[draw,very thick] (E) -- ( 0:\LENGTH );
         \path (E) node[fixture={\LENGTH}{\THICKNESS}, anchor=north west] {};
 
-        % draw left wall
+        % left wall
         \path[draw,very thick] (E) -- ( 90:\HEIGHT );
-        \path (E) node[fixture={\THICKNESS}{\HEIGHT}, anchor=south east] {};
+        \path (E) node[fixture={\THICKNESS}{\HEIGHT},    anchor=south east] {};
         \path (E) node[fixture={\THICKNESS}{\THICKNESS}, anchor=north east] {};
 
-        % draw connection of spring to wall
+        % connection of spring to wall
         \path[draw] (F) -- (L);
 
-        % draw spring's coil
+        % spring's coil
         \path[spring=\STRETCH] (L) -- (R);
 
-        % draw connection of spring to mass
-        \path[draw] (R) -- ( $(M)-( .5*\MASS, 0 )$ );
+        % connection of spring to mass
+        \path[draw] (R) -- ( $(M) - ( .5*\MASS, 0 )$ );
 
-        % draw mass
-        \path (M) node[mass=\MASS,yshift=0.4pt] (M) {$m$};
+        % mass
+        \path (M)
+            node[mass=\MASS,yshift=0.4pt] (M) {$m$};
 
-        % draw coordinate system
-        \draw[axis] ( $(EQ)+( -2,  0.00)$ ) -- ( $(EQ) + ( 2.00, 0.00 )$ ) node[below right] {$x$};
-        \draw[axis] ( $(EQ)+(  0, -0.25)$ ) -- ( $(EQ) + ( 0.00, 1.00 )$ ) node[above left]  {$y$};
+        % coordinate system
+        \draw[axis] ( $(EQ) + ( -2,  0.00 )$ ) -- ( $(EQ) + ( 2.00, 0.00 )$ )
+            node[below right] {$x$};
+        \draw[axis] ( $(EQ) + (  0, -0.25 )$ ) -- ( $(EQ) + ( 0.00, 1.00 )$ )
+            node[above left]  {$y$};
 
     \end{scope}  % [yshift=#4]
 }  % \newcommand{\HorizontalMassSpringSystem}
