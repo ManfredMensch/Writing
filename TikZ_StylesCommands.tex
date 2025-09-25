@@ -217,14 +217,14 @@
 		\path coordinate (MT) at ( $(B)  - (0,\ATTACHMENT)$ );          % top of mass
 		\path coordinate (MC) at ( $(MT) - (0,+0.5*\MASS)$ );           % center of mass
 
-        % draw fixture
+        % fixture
 		\path[draw,very thick] (FL) -- (FR);
 		\path (FM) node[fixture={\LENGTH}{\THICKNESS}, anchor = south] {};
 
 		% connect spring to fixture
 		\path[draw] (FM) -- (T);
 
-		% draw spring's coil
+		% spring's coil
 		\path[spring=\STRETCH] (T) -- (B);
 
 		% connect spring to mass
@@ -232,24 +232,27 @@
 
         \ifthenelse{\MASS > 0}
         {
-    		% draw mass
-            \path (MC) node[mass=\MASS] (M) {$m$};
+    		% mass
+            \path (MC)
+                node[mass=\MASS] (M) {$m$};
         }
 
-        % draw coordinate system
-        \draw[axis] (R) -- +(-0.9,0) -- +(+0.9,0) node[below right] {$x$};
-        \draw[axis] (R) -- +(0,-3.5) node[below right] {$y$};
+        % coordinate system
+        \draw[axis] ( $(R) + ( -0.9, 0 )$ ) -- ( $(R) + ( +0.9,  0   )$ )
+            node[below right] {$x$};
+        \draw[axis] ( $(R)              $ ) -- ( $(R) + (  0,   -3.5 )$ )
+            node[below right] {$y$};
 
-		% indicate spring's relaxed length
-		\draw[dashed] (FM)  +(-0.1,0)     --  +(-0.9,0);
-        \draw[dashed] (R) +(-0.1,0)     --  +(-0.9,0);
-		\draw[latex-latex,dashed] ( $(FM) + (-0.5, 0.0)$ ) -- node[fill=white] {$l_0$} ( $(R) + (-0.5, 0.0)$ );
+		% spring's relaxed length
+		\draw[dashed] ( $(FM)  + ( -0.1, 0 )$ ) -- ( $(FM) + ( -0.9, 0 )$ );
+		\draw[dashed] ( $(R)   + ( -0.1, 0 )$ ) -- ( $(R)  + ( -0.9, 0 )$ );
+		\draw[latex-latex,dashed] ( $(FM) + ( -0.5, 0.0 )$ ) -- node[fill=white] {$l_0$} ( $(R) + ( -0.5, 0.0 )$ );
         \ifthenelse{\MASS > 0}
         {
-            % indicate spring's extension
-            \draw[dashed] (R) +(-0.1,0)     --  +(-0.9,0);
-            \draw[dashed] (MT) +(-0.1,0)     --  +(-0.9,0);
-            \draw[latex-latex,dashed] ( $(R) + (-0.5, 0.0)$ ) -- node[fill=white] {#4} ( $(MT) + (-0.5, 0.0)$ );
+            % spring's extension
+            \draw[dashed] ( $(R)   + ( -0.1, 0 )$ ) -- ( $(R)  + ( -0.9, 0 )$ );
+            \draw[dashed] ( $(MT)  + ( -0.1, 0 )$ ) -- ( $(MT) + ( -0.9, 0 )$ );
+            \draw[latex-latex,dashed] ( $(R) + ( -0.5, 0.0 )$ ) -- node[fill=white] {#4} ( $(MT) + ( -0.5, 0.0 )$ );
         }
 
     \end{scope}  % [xshift=#5]
