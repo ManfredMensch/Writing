@@ -12,10 +12,9 @@
    \end{minipage}%
    \begin{minipage}[t]{0.9\textwidth}%
         \thmname{#1}%
-        \thmnote{: \\#3\\[-8pt]}%
+        \thmnote{: \\#3\newline\vspace{-8pt}}%
    \end{minipage}%
   }
-
 \theoremstyle{MyTheorem}
     \newtheorem{theorem}{Theorem}[section]
     \newtheorem{lemma}[theorem]{Lemma}
@@ -34,10 +33,9 @@
    \end{minipage}%
    \begin{minipage}[t]{0.9\textwidth}%
         \thmname{#1}%
-        \thmnote{: \\#3\\[-8pt]}%
+        \thmnote{: \\#3\newline\vspace{-8pt}}%
    \end{minipage}%
   }  % head specification
-
 \theoremstyle{MyDefinition}
     \newtheorem{definition}[theorem]{Definition}
     \newtheorem{notation}[theorem]{Notation}
@@ -62,7 +60,6 @@
         \thmnote{\ : #3}%
    \end{minipage}%
   }  % head specification
-
 \theoremstyle{NumberedExample}
     \newtheorem{example_n}{Example}[section]
 
@@ -76,7 +73,6 @@
   {}                                            % punctuation after head
   {\newline}                                    % space after head: \newline = linebreak
   {\thmname{#1}\thmnote{: #3}}                  % head specification
-
 \theoremstyle{MyRemark}
     \newtheorem{remark}{Remark}
     \newtheorem{remarks}{Remarks}
