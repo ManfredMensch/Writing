@@ -1,6 +1,7 @@
 antiderivative
 cosinusoidal
 Dimensionalization
+dimensionalized
 gridlines
 Nondimensionalization
 scalings
