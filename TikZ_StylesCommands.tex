@@ -79,6 +79,7 @@
         \draw[axis]    ( $(O) + (  0.00, -0.25)$ )
                     -- ( $(O) + (  0.00, \ROD + 2*\THICKNESS)$ )
             node[above right] {$y$};
+        \path node at (O) {$\mathcal{O}$};
         % plane polar
         % radial unit vector
         \draw[axis]    ( $(MC)$ )
@@ -132,7 +133,7 @@
         \def\ROD{#1}              % length of rod
         \def\ANGLE{#2}            % angle of rod with vertical
         \def\MASS{#3}             % radius of circle representing mass
-        \def\ARC{0.50*\ANGLE}     % angle of arc indicating circular trajectory of the mass
+        \def\ARC{0.75*\ANGLE}     % angle of arc indicating circular trajectory of the mass
 
         % define coordinates
         \path coordinate (P)   at ( 0, 0 );                % pivot point of pendulum
@@ -144,7 +145,7 @@
 
         % arc
         \draw[dashed] (P) ++ ( \ANGLE-\ARC-90 : \ROD ) arc ( \ANGLE-\ARC-90 : \ANGLE+\ARC-90 : \ROD );
-    
+
         % tension force from rod
         \draw[force] (MC) -- ++( \ANGLE+90 : 0.25*\G )
             node[below left=1pt] {${{\vec{F}}\!_r}$};
