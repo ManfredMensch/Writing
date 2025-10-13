@@ -10,6 +10,7 @@ disjointness
 extremal
 gridlines
 Groupoid
+indeterminates
 Injective
 injectivity
 Lindelöf
