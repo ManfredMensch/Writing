@@ -23,6 +23,7 @@ Powerset
 scalings
 Semigroup
 subtuple
+summands
 supersets
 Surjective
 undriven
