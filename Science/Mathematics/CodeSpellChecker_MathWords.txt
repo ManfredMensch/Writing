@@ -15,6 +15,7 @@ Injective
 injectivity
 Lindelöf
 linearization
+monic
 Monoid
 multiplicatively
 Nondimensionalization
