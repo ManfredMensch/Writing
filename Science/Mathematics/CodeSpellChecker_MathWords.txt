@@ -24,6 +24,7 @@ parenthesizations
 Powerset
 scalings
 Semigroup
+subring
 subtuple
 summands
 supersets
