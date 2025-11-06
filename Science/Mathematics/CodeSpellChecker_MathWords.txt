@@ -22,6 +22,7 @@ Nondimensionalization
 nullary
 parenthesizations
 Powerset
+pseudoring
 scalings
 Semigroup
 subring
