@@ -41,6 +41,85 @@
 }  % \tikzset
 
 
+%========= CompoundGravityPendulum ==================================================================
+%========= Schematic ==============================================================================
+\newcommand{\CompoundGravityPendulum}[3]
+    % Schematic Diagram of Compound Gravity Pendulum
+    % #1 : angle of rigid body's equilibrium orientation with vertical
+	% #2 : horizontal shift of sub figure
+	% #3 : vertical   shift of sub figure
+    % !!!   No terminating ';' when calling this command   !!!
+{
+    \begin{scope}[xshift=#2,yshift=#3]
+        % define constants
+        \def\ANGLE{#1}            % angle of rigid body's equilibrium orientation with vertical
+        \def\ARC{2.50*\ANGLE}     % angle of arc indicating circular trajectory of the center of mass
+
+        % define coordinates
+        \def\G{10.0}              % gravitational acceleration
+
+        \path coordinate (O)  at ( 0.0, 0.0 );      % origin of Cartesian coordinate system
+		\path coordinate (P)  at ( 0.0, 0.0 );      % pivot point of rigid body
+
+        % rigid body
+        \begin{scope}[rotate=\ANGLE]
+		    \path coordinate (CM)  at ( 0.0, -3.0  );   % center of mass of rigid body
+            % shape of rigid body
+            \draw [blue, fill=blue!10]
+                plot [smooth cycle]
+                coordinates {(0,2) (1,1) (0.5,-1.5) (2,-3) (0,-4.5) (-2,-3) (-0.5,-1.5) (-1,1)};
+            % center of mass
+            \draw[blue, fill=blue] (0,-3) circle(2.0pt);
+            % position vector of center of mass
+            \draw[->,>=stealth,thick] (O) -- (CM)
+                node[above left=4pt] {$\vec{r}_{\text{\tiny CM}}$};
+            % center line of rigid body
+            \draw[blue, dashed, thin] ( 0.0, 2.0 ) -- ( 0.0, -4.5 );
+        \end{scope}
+
+        % pivot point
+        \draw[, thin] (P) circle (1.0pt);
+
+		% distance between pivot point and center of mass
+		\draw[latex-latex,dashed,gray]
+            ( $(O)$ ) -- node[black,fill=white,inner sep = 1pt] {$d$} ( -\ANGLE-90 : 3.0 );
+
+        % coordinate systems
+        % Cartesian
+        \draw[axis]    ( $(O) + ( -3.50,  0.00 )$ )
+                    -- ( $(O) + ( +3.50,  0.00 )$ )
+            node[below right] {$x$};
+        \draw[axis]    ( $(O) + (  0.00, -5.00 )$ )
+                    -- ( $(O) + (  0.00, +2.25 )$ )
+            node[above right] {$y$};
+        \path node at (O) {$\mathcal{O}$};
+        % plane polar
+        % radial unit vector
+        \draw[axis]    ( $(CM)$ )
+                    -- ( $(CM) + ( \ANGLE-90 : 1 )$ )
+            node[above right=1pt] {$\hat{r}$};
+        % tangential unit vector
+        \draw[axis]    ( $(CM)$ )
+                    -- ( $(CM) + ( \ANGLE : 1 )$ )
+            node[below right=1pt] {$\hat{\uptheta}$};
+
+        % gravitational force
+        \draw[force]    ( $(CM)$ )
+                     -- ( $(CM) + ( 0.00, -0.20 * \G)$ )
+            node[left=1pt] {${{\vec{F}}\!_g}$};
+
+        % part of the circular trajectory of the center of mass
+        \draw[dashed] (P) ++ ( -\ARC-90 : 3.0 ) arc ( -\ARC-90 : \ARC-90 : 3.0 );
+
+        % angle between rigid body's equilibrium orientation and vertical y-axis
+        \draw[dotted,->,>=stealth] (P) ++( -90 : 1.5 ) arc ( -90 : \ANGLE-90 : 1.5 );
+        \path (P) ++ ( {0.5*\ANGLE-90} : 1.5 )
+            node[below=-5pt,fill=blue!10,inner sep = 1pt] {$\theta$};
+
+    \end{scope}  % [xshift=#2,yshift=#3]
+}  % \newcommand{\CompoundGravityPendulum}
+
+
 %========= SimpleGravityPendulum ==================================================================
 %========= Schematic ==============================================================================
 \newcommand{\SimpleGravityPendulum}[5]
