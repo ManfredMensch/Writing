@@ -380,7 +380,8 @@
         \path[draw] (F) -- (L);
 
         % spring's coil
-        \path[spring=\STRETCH] (L) -- (R);
+        \path[spring=\STRETCH] (L) -- (R)
+            node[midway,above=7pt] {$k$};
 
         % connection of spring to mass
         \path[draw] (R) -- ( $(M) - ( .5*\MASS, 0 )$ );
