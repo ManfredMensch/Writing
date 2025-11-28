@@ -34,39 +34,39 @@
         {\footnotesize #4}
     \end{minipage}}
 
-% various mathematical symbols
-\DeclareMathOperator{\ID}{ id }
-\DeclareMathOperator{\SPAN}{ span }
-\DeclareMathOperator{\DIM}{ dim }
-\DeclareMathOperator{\RANGE}{ range }
-\DeclareMathOperator{\KER}{ ker }
-\DeclareMathOperator{\DEG}{ deg }
+% % various mathematical symbols
+% \DeclareMathOperator{\ID}{ id }
+% \DeclareMathOperator{\SPAN}{ span }
+% \DeclareMathOperator{\DIM}{ dim }
+% \DeclareMathOperator{\RANGE}{ range }
+% \DeclareMathOperator{\KER}{ ker }
+% \DeclareMathOperator{\DEG}{ deg }
 
-\newcommand{\REST}[2]
-{
-    {\,#1|_#2\,}
-}
+% \newcommand{\REST}[2]
+% {
+%     {\,#1|_#2\,}
+% }
 
-\stackMath                              %  change the default to process arguments in inline math mode
-\newcommand\vwidehat[1]%
-{%
-    \savestack
-    {\tmpbox}
-    {%
-        \stretchto%         % create and save an intermediate result
-        {
-            \scaleto%
-            {%
-                \scalerel*[\widthof{\ensuremath{#1}}]%
-                {\kern-.6pt\bm\wedge\kern-.6pt}%
-                {\rule[-\textheight/2]{1ex}{\textheight}}%
-            }
-            {\textheight}%
-        }%
-        {0.55ex}%
-    }%
-    \stackon[1pt]{#1}{\tmpbox}%
-}
+% \stackMath                              %  change the default to process arguments in inline math mode
+% \newcommand\vwidehat[1]%
+% {%
+%     \savestack
+%     {\tmpbox}
+%     {%
+%         \stretchto%         % create and save an intermediate result
+%         {
+%             \scaleto%
+%             {%
+%                 \scalerel*[\widthof{\ensuremath{#1}}]%
+%                 {\kern-.6pt\bm\wedge\kern-.6pt}%
+%                 {\rule[-\textheight/2]{1ex}{\textheight}}%
+%             }
+%             {\textheight}%
+%         }%
+%         {0.55ex}%
+%     }%
+%     \stackon[1pt]{#1}{\tmpbox}%
+% }
 
-% custom AMS theorem environments 
-\input{/home/manfredm/Projects/Writing/AMS_TheoremEnvironments}
+% % custom AMS theorem environments 
+% \input{/home/manfredm/Projects/Writing/AMS_TheoremEnvironments}
