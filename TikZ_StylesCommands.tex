@@ -36,7 +36,7 @@
                   fill=blue,
                   thick},
     %
-    rod/.style={draw=blue,
+    rod/.style={draw,
                 thick},
 }  % \tikzset
 
@@ -220,14 +220,14 @@
 
         % vertical
         \draw[densely dotted,gray]    (P) + (  {\ROD * sin(\ANGLE)}, +0.50 )
-                                   --     + (  {\ROD * sin(\ANGLE)}, -\ROD - 0.25 );
+                                   --     + (  {\ROD * sin(\ANGLE)}, -\ROD - 2.00 );
 
         % arc
         \draw[dashed] (P) ++ ( \ANGLE-\ARC-90 : \ROD ) arc ( \ANGLE-\ARC-90 : \ANGLE+\ARC-90 : \ROD );
 
         % tension force from rod
         \draw[force] (MC) -- ++( \ANGLE+90 : 0.25*\G )
-            node[below left=1pt] {${{\vec{F}}\!_r}$};
+            node[below left=1pt] {${{\vec{F}}\!_t}$};
 
         % angle between tension force from rod and vertical
         \draw[dotted,->,>=stealth] (MC) ++ ( +90 : 1.5 ) arc ( +90 : \ANGLE+90 : 1.5 );
