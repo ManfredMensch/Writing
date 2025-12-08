@@ -6,9 +6,13 @@ bijectivity
 codomain
 codomains
 cosinusoidal
+diagonalizable
 Dimensionalization
 disjointness
 distributivities
+eigenspace
+eigenspaces
+eingenvalues
 extremal
 gridlines
 Groupoid
