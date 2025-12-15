@@ -31,6 +31,14 @@
     }%
     \stackon[1pt]{#1}{\tmpbox}%
 }
+\newcommand\usim[2][1]%
+{%
+    \ifnum#1>1%
+        \stackunder[0pt]{\usim[\numexpr#1-1\relax]{#2}}{\scriptscriptstyle\sim}%
+    \else%
+        \stackunder[1pt]{#2}{\scriptscriptstyle\sim}%
+    \fi%
+}
 
 % custom AMS theorem environments
 \input{/home/manfredm/Projects/Writing/AMS_TheoremEnvironments}
