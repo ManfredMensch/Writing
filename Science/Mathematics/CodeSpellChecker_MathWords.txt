@@ -33,6 +33,7 @@ Powerset
 pseudoring
 scalings
 Semigroup
+signum
 subring
 subtuple
 summands
