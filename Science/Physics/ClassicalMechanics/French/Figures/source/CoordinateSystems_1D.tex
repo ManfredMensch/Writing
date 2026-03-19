@@ -1,0 +1,119 @@
+\begin{figure}[h!t]
+
+    \centering
+    
+    \begin{tikzpicture}
+        
+        % layout
+        \def\ARC{1.2cm}     % radius of the arc used to indicate angles
+        
+        % parameters
+        \def\Px{1.75}       % x coordinate of point P
+        \def\Py{0.00}       % y coordinate of point P
+%
+%================================================
+%                                
+        % Cartesian coordinate system
+        \begin{scope}[xshift=0cm,yshift=0cm]
+\ifdebug
+            % grid lines
+            \path[draw,grid=0.25cm] (-3.50,-3.00) grid (3.00,2.75);
+\fi
+            
+            \begin{scope}[rotate=47.5]
+                % objects
+                \path coordinate (O) at (0,0);          % origin O
+                \path coordinate (P) at (\Px,\Py);      % point P
+               % reference axes
+                \draw[main_axis] (-3.60,0) -- (3.25,0) node[below right] {$$};
+                % origin
+                \path node at (O) {$\mathcal{O}$};
+                % tick marks at unit intervals
+                \foreach \x in {-3,...,3}
+                {
+                    \path[tick] (\x,-2pt) -- (\x,+2pt);
+                }
+                \foreach \x in {-3,...,-1}
+                {
+                    \path node[above left, inner sep=2pt]
+                        at (\x,0) {$\x$};
+                }
+                \foreach \x in {1,...,3}
+                {
+                    \path node[above left, inner sep=2pt]
+                        at (\x,0) {$\x$};
+                }
+                    
+                % indicate positive and negative half-line
+                \path node at ( 3.45,0.00) {$\mathbf{+}$};
+                \path node at (-3.75,0.00) {$\mathbf{-}$};                
+                % point P
+                \filldraw[blue] (P) circle (2pt);
+                \path node[text=blue,below right, inner sep=1pt]
+                    at (P) {$\mathcal{P}=(d_\mathcal{P})$};
+            
+            \end{scope}
+            
+            % label sub figure
+            \path node[above right] at (-3.50,-3.00) {[\textbf{a}]};
+                        
+        \end{scope}
+%
+%================================================
+%                        
+        % polar coordinate system
+        \begin{scope}[xshift=7.1cm,yshift=0cm]
+\ifdebug
+            % grid lines
+            \path[draw,grid=0.25cm] (-3.50,-3.00) grid (3.00,2.75);
+\fi
+
+            \begin{scope}[rotate around={27.5:(0,0)}]
+                
+                % objects
+                \path coordinate (O) at (0,0);          % origin O
+                \path coordinate (P) at (-1.75,{-sin(1.75*180/pi)*1.75*1.1});      % point P
+
+                %  arc from origin to point P
+                \draw[scale=1.0, domain=-1.75:0, smooth, samples=1000, gray, line width=1mm, variable=\x]
+                    plot ({\x}, {-sin(\x*180/pi)*\x*1.1});
+                
+                % trajectory
+                \draw[scale=1.0, domain=-3.25:0, smooth, variable=\x] plot ({\x}, {-sin(\x*180/pi)*\x*1.1});
+                \draw[scale=1.0, domain=0:3.05, smooth, variable=\x] plot ({\x}, {sin(\x*180/pi)*\x*1.1});
+                % indicate positive and negative direction along the curve
+                \path node at (  3.10,{ sin(3.10*180/pi)*3.10*1.1}) {$\mathbf{+}$};
+                \path node at ( -3.30,{-sin(3.30*180/pi)*3.30*1.1}) {$\mathbf{-}$};
+                
+                % origin
+                \path node at (O) {$\mathcal{O}$};
+                % tick marks at unit intervals
+%                 \foreach \x in {-3,...,2}
+                \path[tick] (0,-2pt) -- (0,+2pt);
+                % point P
+                \filldraw[blue] (P) circle (2pt);
+                \path node[text=blue,below right, inner sep=1pt]
+                    at (P) {$\mathcal{P}=(d_\mathcal{P})$};
+            
+            \end{scope}
+            
+            % label sub figure
+            \path node[above right] at (-3.55,-3.00) {[\textbf{b}]};
+                    
+        \end{scope}
+%
+%================================================
+%                    
+    \end{tikzpicture}
+    
+    \caption[One-dimensional coordinate systems]
+            {One-dimensional coordinate systems
+            \begin{description}%[nosep,left=\parindent,itemindent=-20pt]
+                \item[{[a]}] Straight line \showthe\labelwidth
+                \item[{[b]}] Curved path
+            \end{description}
+            }
+            
+    \label{F:CS_1D}
+    
+\end{figure}
