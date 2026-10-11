@@ -1,4 +1,5 @@
 amsbsy
+amsfonts
 amsopn
 amstext
 antiderivative
@@ -7,10 +8,16 @@ citecolor
 cosinusoidal
 Dimensionalization
 filecolor
+ﬂoating
 fontsize
+graphicx
 gridlines
+itemindent
 labelfont
+labelformat
+labelindent
 labelsep
+labelwidth
 lightgray
 linkbordercolor
 linkcolor

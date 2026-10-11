@@ -3,6 +3,7 @@ antiderivative
 biconditional
 Bijective
 bijectivity
+circumcircle
 codomain
 codomains
 cosinusoidal
@@ -14,6 +15,7 @@ eigenspace
 eigenspaces
 eingenvalues
 extremal
+gons
 gridlines
 Groupoid
 indeterminates
@@ -32,6 +34,7 @@ parenthesizations
 Powerset
 pseudoring
 scalings
+Schwarz
 Semigroup
 signum
 subring
@@ -43,3 +46,4 @@ surjectivity
 undriven
 unital
 unshifted
+WLOG
